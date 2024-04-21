@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Grid : MonoBehaviour
         ROW_CLEAR,
         COLUMN_CLEAR,
         RAINBOW,
+        BOMB,
         COUNT
     }
 
@@ -237,7 +239,7 @@ public class Grid : MonoBehaviour
         return (piece1.X == piece2.X && (int)Mathf.Abs(piece1.Y - piece2.Y) == 1) 
                || (piece1.Y == piece2.Y && (int)Mathf.Abs(piece1.X - piece2.X) == 1);
     }
-    public void SwapPieces(GamePiece piece1, GamePiece piece2)
+    public  void SwapPieces(GamePiece piece1, GamePiece piece2)
     {
         if (gameOver)
         {
@@ -249,7 +251,8 @@ public class Grid : MonoBehaviour
             pieces[piece2.X, piece2.Y] = piece1;
 
             if (GetMatch(piece1, piece2.X, piece2.Y) != null || GetMatch(piece2, piece1.X, piece1.Y) != null 
-                || piece1.Type == PieceType.RAINBOW || piece2.Type == PieceType.RAINBOW)
+                || piece1.Type == PieceType.RAINBOW || piece2.Type == PieceType.RAINBOW
+                || piece1.Type == PieceType.BOMB || piece2.Type == PieceType.BOMB)
             {
                 int piece1X = piece1.X;
                 int piece1Y = piece1.Y;
@@ -277,7 +280,28 @@ public class Grid : MonoBehaviour
 
                     ClearPiece(piece2.X, piece2.Y);
                 }
-                
+                if (piece1.Type == PieceType.BOMB)
+                {
+                    Debug.Log("In method Swap piece1");
+                    ClearAroundPiece clearAround = piece1.GetComponent<ClearAroundPiece>();
+                    clearAround.Clear();
+                    Destroy(pieces[piece1.X,piece1.Y].gameObject);
+                    SpawnNewPiece(piece1.X,piece1.Y, PieceType.EMPTY);
+                    //ClearPiece(piece1.X, piece1.Y);
+                    //await Task.Delay(100);
+                    //SpawnNewPiece(piece1.X, piece1.Y, PieceType.NORMAL);
+                }
+                if (piece2.Type == PieceType.BOMB)
+                {
+                    Debug.Log("In method Swap piece1");
+                    ClearAroundPiece clearAround = piece2.GetComponent<ClearAroundPiece>();
+                    clearAround.Clear();
+                    Destroy(pieces[piece1.X,piece1.Y].gameObject);
+                    SpawnNewPiece(piece1.X,piece1.Y, PieceType.EMPTY);
+                    //ClearPiece(piece2.X, piece2.Y);
+                    //await Task.Delay(100);
+                    //SpawnNewPiece(piece2.X, piece2.Y, PieceType.NORMAL);
+                }
                 ClearAllValidMatches();
 
                 if (piece1.Type == PieceType.ROW_CLEAR || piece1.Type == PieceType.COLUMN_CLEAR)
@@ -557,9 +581,13 @@ public class Grid : MonoBehaviour
                                 specialPieceType = PieceType.COLUMN_CLEAR;
                             }
                         }
-                        else if (match.Count >= 5)
+                        else if (match.Count >= 5 &&(IsHorizontalMatch(match) || IsVerticalMatch(match)))
                         {
                             specialPieceType = PieceType.RAINBOW;
+                        }
+                        else if (match.Count >= 5 && (!IsHorizontalMatch(match) || !IsVerticalMatch(match)))
+                        {
+                            specialPieceType = PieceType.BOMB;
                         }
                         for (int i = 0; i < match.Count; i++)
                         {
@@ -586,8 +614,12 @@ public class Grid : MonoBehaviour
                             }
                             else if (specialPieceType == PieceType.RAINBOW && newPiece.IsColored())
                             {
-                                
+                                newPiece.ColorComponent.SetColor(ColorPiece.ColorType.ANY);
                             }
+                            //else if (specialPieceType == PieceType.BOMB && !newPiece.IsColored())
+                            //{
+                                
+                            //}
                         }
                     }
                 }
@@ -599,17 +631,35 @@ public class Grid : MonoBehaviour
     
     public bool ClearPiece(int x, int y)
     {
-        if (pieces[x, y].IsClearable() && !pieces[x, y].ClerableComponent.IsBeingCleared)
+        if (x < xDim && x >= 0 && y < yDim && y >= 0)
         {
-            pieces[x, y].ClerableComponent.Clear();
-            SpawnNewPiece(x, y, PieceType.EMPTY);
-            ClearObstacles(x, y);
-            return true;
+            if (pieces[x, y].IsClearable() && !pieces[x, y].ClerableComponent.IsBeingCleared)
+            {
+                Debug.Log("ClearPieces");
+                pieces[x, y].ClerableComponent.Clear();
+                Debug.Log("Clear");
+                SpawnNewPiece(x, y, PieceType.EMPTY);
+                Debug.Log("SpawnNewPiece");
+                ClearObstacles(x, y);
+                return true;
+            }
         }
 
         return false;
     }
+    private bool IsHorizontalMatch(List<GamePiece> pieces)
+    {
+        int minY = pieces.Min(piece => piece.Y);
+        int maxY = pieces.Max(piece => piece.Y);
+        return (maxY - minY) == 4; // Перевірка, чи відстань між мінімальним і максимальним Y дорівнює 4
+    }
 
+    private bool IsVerticalMatch(List<GamePiece> pieces)
+    {
+        int minX = pieces.Min(piece => piece.X);
+        int maxX = pieces.Max(piece => piece.X);
+        return (maxX - minX) == 4; // Перевірка, чи відстань між мінімальним і максимальним X дорівнює 4
+    }
     public void ClearObstacles(int x, int y)
     {
         for (int adjacentX = x - 1; adjacentX <= x + 1; adjacentX++)
@@ -665,6 +715,23 @@ public class Grid : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ClearAround(int x, int y)
+    {
+        Debug.Log("In ClearAround");
+        //ClearPiece(x, y);
+        ClearPiece(x-1, y-1);
+        ClearPiece(x-1, y);
+        ClearPiece(x-1, y+1);
+        ClearPiece(x, y+1);
+        ClearPiece(x, y-1);
+        //Destroy(pieces[x,y].gameObject);
+        //SpawnNewPiece(x, y, PieceType.NORMAL);
+        ClearPiece(x+1, y-1);
+        ClearPiece(x+1, y);
+        ClearPiece(x+1, y+1);
+        
     }
 
     public void GameOver()

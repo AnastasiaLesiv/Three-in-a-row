@@ -9,11 +9,13 @@ KinoBloom.Runtime.csproj
 Library/
 Logs/
 Temp/
-Three-in-a-row.sln
 ToonyColorsPro.Demo.Editor.csproj
 UserSettings/
 mono_crash.mem.166.1.blob
 mono_crash.mem.414.1.blob
 mono_crash.mem.6175.1.blob
 obj/
+Three-in-a-row.sln
+Three-in-a-row2.sln
+mono_crash.mem.184.1.blob
 

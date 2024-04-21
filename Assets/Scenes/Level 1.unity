@@ -160,7 +160,7 @@ MonoBehaviour:
   - type: 0
     prefab: {fileID: 3324681609975628731, guid: 97ba1046cdc748ec1999e15bd4cfeabc, type: 3}
   - type: 1
-    prefab: {fileID: 5141819677558155734, guid: cd54a1946ae63569e92b561ae56d2e3a, type: 3}
+    prefab: {fileID: 4201709394643623457, guid: cd54a1946ae63569e92b561ae56d2e3a, type: 3}
   - type: 2
     prefab: {fileID: 619925221036137204, guid: 5789edd73be60aa249de27929cf5b363, type: 3}
   - type: 3
@@ -169,6 +169,8 @@ MonoBehaviour:
     prefab: {fileID: 715568928458922972, guid: 6a5999b6a89b5fe0a8b9ae4e95c18f89, type: 3}
   - type: 5
     prefab: {fileID: 7332044584362651615, guid: 03f6fbdd4ba8b185296364efb9df9451, type: 3}
+  - type: 6
+    prefab: {fileID: 9096611397719887422, guid: 8a18aec150168f1f6ba81b1534cd3f7c, type: 3}
   backgroundPrefab: {fileID: 7248352124461822497, guid: c72f51572f331bddd9a8265c068354b6, type: 3}
   initialPieces: []
 --- !u!4 &228916043
@@ -698,6 +700,14 @@ PrefabInstance:
     - target: {fileID: 1456734027696151653, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498709778354805440, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498709778354805440, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: LevelSelect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}

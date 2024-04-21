@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class HUD : MonoBehaviour
         }
         else if (score >= level.score3Star)
         {
+            Debug.Log("Take 3 stars");
             visibleStar = 3;
         }
 
@@ -107,6 +109,10 @@ public class HUD : MonoBehaviour
     public void OnGameWin(int score)
     {
         gameOver.ShowWin(score, starIdx);
+        if (starIdx > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, starIdx);
+        }
     }
 
     public void OnGameLose()

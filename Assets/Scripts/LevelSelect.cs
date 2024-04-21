@@ -5,10 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [System.Serializable]
+    public struct ButtonPlayerPrefs
+    {
+        public GameObject gameObject;
+        public string playerPrefKey;
+    }
+
+    public ButtonPlayerPrefs[] buttons;
     void Start()
     {
         
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            int score = PlayerPrefs.GetInt(buttons[i].playerPrefKey, 0);
+            for (int starIdx = 1; starIdx <= 3; starIdx++)
+            {
+                Transform star = buttons[i].gameObject.transform.Find("Star_" + starIdx);
+                if (starIdx <= score)
+                {
+                    Debug.Log("Stars for level"+ (i+1)+ " Active");
+                    star.gameObject.SetActive(true);
+                }
+                else
+                {
+                    star.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
