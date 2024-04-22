@@ -54,7 +54,6 @@ public class HUD : MonoBehaviour
         }
         else if (score >= level.score3Star)
         {
-            Debug.Log("Take 3 stars");
             visibleStar = 3;
         }
 

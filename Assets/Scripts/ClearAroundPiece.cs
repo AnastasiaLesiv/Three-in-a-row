@@ -18,9 +18,7 @@ public class ClearAroundPiece : ClerablePiece
     
     public override void Clear()
     {
-        Debug.Log("Do method Clear in class ClearAroundPiece");
         base.Clear();
-        Debug.Log("Do method ClearAround in class ClearAroundPiece");
         piece.GridRef.ClearAround(piece.X, piece.Y);
     }
 }

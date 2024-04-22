@@ -25,7 +25,7 @@ public class Level : MonoBehaviour
         get => type;
     }
 
-    protected int currentScore;
+    public int currentScore;
 
     protected bool didWin;
     // Start is called before the first frame update

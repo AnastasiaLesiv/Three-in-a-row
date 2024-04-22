@@ -46,7 +46,7 @@ public class GameOver : MonoBehaviour
         screenParent.SetActive(true);
         loseText.enabled = false;
 
-        scoreText.text = score.ToString();
+        scoreText.text = "wow, you are well\ndone, you earned\n" + score.ToString();
         scoreText.enabled = false;
         Animator animator = GetComponent<Animator>();
         if (animator)

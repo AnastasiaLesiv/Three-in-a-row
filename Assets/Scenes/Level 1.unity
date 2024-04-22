@@ -600,6 +600,7 @@ MonoBehaviour:
   score1Star: 15000
   score2Star: 18000
   score3Star: 21000
+  currentScore: 0
   numMoves: 14
   targetScore: 15000
 --- !u!1001 &1456734027862727827
@@ -609,6 +610,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1456734026750423735, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_text
+      value: "oh, you lost, but don't be sad\n try again)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026750423735, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_fontSize
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026750423735, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026830776600, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 363.1882
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026830776600, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 352.8003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026830776600, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.2409
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456734026830776600, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14.9328
+      objectReference: {fileID: 0}
     - target: {fileID: 1456734027696151649, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
       propertyPath: level
       value: 
@@ -701,6 +730,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1456734028069161611, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -33557252, guid: ed5b9c6cd9f0f19059d4c9e4271d61c9, type: 3}
     - target: {fileID: 1498709778354805440, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5

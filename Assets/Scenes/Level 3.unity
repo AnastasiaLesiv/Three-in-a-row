@@ -290,6 +290,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1456734028069161611, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -33557252, guid: ed5b9c6cd9f0f19059d4c9e4271d61c9, type: 3}
     - target: {fileID: 1498709778354805440, guid: 66e9df0afe2abba20846ddd612dd3cb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
@@ -423,7 +427,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 8cfe526af53b196d3ac58c48b897a98e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3276fc80343d8a916a2fb7296c6632cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -698,6 +702,7 @@ MonoBehaviour:
   score1Star: 50000
   score2Star: 65000
   score3Star: 75000
+  currentScore: 0
   timeInSeconds: 90
   targetScore: 50000
 --- !u!114 &1720865781 stripped

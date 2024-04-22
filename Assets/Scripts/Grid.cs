@@ -635,11 +635,8 @@ public class Grid : MonoBehaviour
         {
             if (pieces[x, y].IsClearable() && !pieces[x, y].ClerableComponent.IsBeingCleared)
             {
-                Debug.Log("ClearPieces");
                 pieces[x, y].ClerableComponent.Clear();
-                Debug.Log("Clear");
                 SpawnNewPiece(x, y, PieceType.EMPTY);
-                Debug.Log("SpawnNewPiece");
                 ClearObstacles(x, y);
                 return true;
             }
@@ -651,14 +648,14 @@ public class Grid : MonoBehaviour
     {
         int minY = pieces.Min(piece => piece.Y);
         int maxY = pieces.Max(piece => piece.Y);
-        return (maxY - minY) == 4; // Перевірка, чи відстань між мінімальним і максимальним Y дорівнює 4
+        return (maxY - minY) == 4;
     }
 
     private bool IsVerticalMatch(List<GamePiece> pieces)
     {
         int minX = pieces.Min(piece => piece.X);
         int maxX = pieces.Max(piece => piece.X);
-        return (maxX - minX) == 4; // Перевірка, чи відстань між мінімальним і максимальним X дорівнює 4
+        return (maxX - minX) == 4; 
     }
     public void ClearObstacles(int x, int y)
     {
@@ -719,15 +716,11 @@ public class Grid : MonoBehaviour
 
     public void ClearAround(int x, int y)
     {
-        Debug.Log("In ClearAround");
-        //ClearPiece(x, y);
         ClearPiece(x-1, y-1);
         ClearPiece(x-1, y);
         ClearPiece(x-1, y+1);
         ClearPiece(x, y+1);
         ClearPiece(x, y-1);
-        //Destroy(pieces[x,y].gameObject);
-        //SpawnNewPiece(x, y, PieceType.NORMAL);
         ClearPiece(x+1, y-1);
         ClearPiece(x+1, y);
         ClearPiece(x+1, y+1);
